@@ -51,25 +51,27 @@ class player(gameobject):
             self.lasty = self.rect.y
             self.rect.y -= 5
             self.directon='verh'
+     def move2(self):
+        self.ris()
+        kn = key.get_pressed()
+        if kn[K_LEFT]:
+            self.lastx = self.rect.x
+            self.rect.x -= 5
+            self.directon='levo'
+        if kn[K_RIGHT]:
+            self.lastx = self.rect.x
+            self.rect.x += 5
+            self.directon="pravo"
+        if kn[K_DOWN]:
+            self.lasty = self.rect.y
+            self.rect.y += 5
+            self.directon=="vniz"
+        if kn[K_UP]:
+            self.lasty = self.rect.y
+            self.rect.y -= 5
+            self.directon='verh'
 
-fon = image.load('fon.jpg')
-fon = transform.scale(fon, (1000,600))
-
-hero = player('gg.png', 200,200, 35,35)
-
-while game:
-    for e in event.get():
-        if e.type == QUIT:
-            game = False
-    okno.blit(fon,(0,0))
-    okno.fill((255,255,0))
-    fps.tick(60)
-    display.update()
-    okno = display.set_mode((1000,650))
-    fps = time.Clock()
-    game = True
-
-class stena(sprite.Sprite):
+class stena(sprite.Sprite): # перенёс класс стены наверх
     def __init__(self, x,y,w,h):
         self.image = Surface((w,h))
         self.image.fill((10, 200, 250))
@@ -79,5 +81,20 @@ class stena(sprite.Sprite):
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
         
-fps.tick(60)
-display.update()
+
+fon = image.load('fon.jpg')
+fon = transform.scale(fon, (1000,600))
+
+hero = player('gg.png', 200,200, 35,35)
+hero2 = player('gg.png', 200,200, 35,35)
+while game:
+    for e in event.get():
+        if e.type == QUIT:
+            game = False
+    okno.blit(fon,(0,0))
+    #okno.fill((255,255,0)) # заливка после фона не нужна
+    fps.tick(60)
+    hero.move()
+    display.update()
+   # стёр повторы кода
+
