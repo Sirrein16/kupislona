@@ -1,6 +1,6 @@
 from pygame import*
 
-okno = display.set_mode((600,600))
+okno = display.set_mode((800,600))
 game = True
 fps = time.Clock()
 
@@ -83,7 +83,7 @@ class stena(sprite.Sprite): # перенёс класс стены наверх
         
 
 fon = image.load('fon.jpg')
-fon = transform.scale(fon, (1000,600))
+fon = transform.scale(fon, (800,600))
 
 hero = player('gg.png', 200,200, 35,35)
 hero2 = player('gg.png', 200,200, 35,35)
