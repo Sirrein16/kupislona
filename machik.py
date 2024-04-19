@@ -24,7 +24,7 @@ class myachsotoni(sprite.Sprite):
       self.rect.x += self.dx
       self.rect.y += self.dy
 
-ball = myachsotoni("картинка", серединапоХ, серединапоУ, ширина, высота)
+ball = myachsotoni("", 400, 300, 40, 40)
 
 # пример использования в цикле while
     
