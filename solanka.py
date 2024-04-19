@@ -16,6 +16,35 @@ class gameobject(sprite.Sprite):
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
 
+    class stena(sprite.Sprite):
+    def __init__(self, x,y,w,h):
+        self.image = Surface((w,h))
+        self.image.fill((10, 200, 250))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+    def ris(self):
+        okno.blit(self.image, (self.rect.x, self.rect.y))
+
+    class player(gameobject):
+    def move(self):
+        self.ris()
+        kn = key.get_pressed()
+        if kn[K_a]:
+            self.lastx = self.rect.x
+            self.rect.x -= 5
+        if kn[K_d]:
+            self.lastx = self.rect.x
+            self.rect.x += 5
+        if kn[K_s]:
+            self.lasty = self.rect.y
+            self.rect.y += 5
+        if kn[K_w]:
+            self.lasty = self.rect.y
+            self.rect.y -= 5
+
+    
+
 
 
     fps.tick(60)
