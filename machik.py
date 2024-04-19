@@ -17,7 +17,7 @@ class myachsotoni(sprite.Sprite):
         self.rect.x = x
         self.rect.y = y
         self.dx = choice([-1,1]) # на старте выбирается случайное -1 или 1
-        self.dy = choice([-1,1]) 
+        self.dy = choice([-1,1])  # choice([-3,-2,-1,1,2,3])
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
     def skok(self):
