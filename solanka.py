@@ -95,6 +95,7 @@ while game:
     #okno.fill((255,255,0)) # заливка после фона не нужна
     fps.tick(60)
     hero.move()
+    hero2.move2()
     display.update()
    # стёр повторы кода
 
