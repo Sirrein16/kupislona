@@ -7,6 +7,7 @@ fps = time.Clock()
 class gameobject(sprite.Sprite):
     def __init__(self, img, x,y,w,h):
         super().__init__()
+        self.image = transform.scale(image.load(img), (w,h))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -14,7 +15,8 @@ class gameobject(sprite.Sprite):
         self.lasty = self.rect.y
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
-        
+      
+
 class player(gameobject):
     def move(self):
         self.ris()
@@ -31,7 +33,8 @@ class player(gameobject):
         if kn[K_w]:
             self.lasty = self.rect.y
             self.rect.y -= 5
-     def move2(self):
+
+    def move2(self):
         self.ris()
         kn = key.get_pressed()
         if kn[K_LEFT]:
@@ -46,6 +49,17 @@ class player(gameobject):
         if kn[K_UP]:
             self.lasty = self.rect.y
             self.rect.y -= 5
+
+
+class stena(sprite.Sprite): # перенёс класс стены наверх
+    def __init__(self, x,y,w,h):
+        self.image = Surface((w,h))
+        self.image.fill((10, 200, 250))
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+    def ris(self):
+        okno.blit(self.image, (self.rect.x, self.rect.y))
 
 class stena(sprite.Sprite): # перенёс класс стены наверх
     def __init__(self, x,y,w,h):
