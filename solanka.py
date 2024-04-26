@@ -1,6 +1,5 @@
 from pygame import*
 
-
 okno = display.set_mode((1200,700))
 game = True
 fps = time.Clock()
@@ -25,19 +24,21 @@ class player(gameobject):
     def move(self):
         self.ris()
         kn = key.get_pressed()
-        if kn[K_a]:
+        if self.rect.x > 50 and  kn[K_a]:
             self.lastx = self.rect.x
             self.rect.x -= 5
-        if kn[K_d]:
+        if self.rect.x < 1100 and  kn[K_d]:
             self.lastx = self.rect.x
             self.rect.x += 5
-        if kn[K_s]:
+        if self.rect.y < 550  and kn[K_s]:
             self.lasty = self.rect.y
             self.rect.y += 5
-        if kn[K_w]:
+        if self.rect.y > 50 and kn[K_w]:
             self.lasty = self.rect.y
             self.rect.y -= 5
-            
+       
+
+
 class stena(sprite.Sprite): # перенёс класс стены наверх
     def __init__(self, x,y,w,h):
         self.image = Surface((w,h))
@@ -51,9 +52,9 @@ class stena(sprite.Sprite): # перенёс класс стены наверх
 from random import*
 
 class myachsotoni(sprite.Sprite):
-    def __init__(self, pik, x,y,sw,sh): #  картинка, икс, игрек, ширина, высота
+    def __init__(self, img, x,y,sw,sh): #  картинка, икс, игрек, ширина, высота
         super().__init__()
-        self.image = transform.scale(image.load(pik), (sw,sh))
+        self.image = transform.scale(image.load(img), (sw,sh))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -62,19 +63,27 @@ class myachsotoni(sprite.Sprite):
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
     def skok(self):
-        self.ris()
-        self.rect.x += self.dx
-        self.rect.y += self.dy
+      self.rect.x += self.dx
+      self.rect.y += self.dy
+      if self.rect.y > 575:
+          self.dy *= -1
+      if self.rect.y < 75:
+          self.dy *= -1
+      if self.rect.x > 50:
+          self.dx *= -1
+      if self.rect.x < 1100:
+          self.dx *= -1
+        
 
-ball = myachsotoni("images.jpg", 780, 280, 60,60)
+ball = myachsotoni("images.png", 780, 280, 60,60)
 
-
-fon = image.load('fon.jpg')
+fon = image.load('fons.jpg')
 fon = transform.scale(fon, (1200,700))
 
 vrag = gameobject('gg2.png', 800, 200, 100, 100)
 
-hero = player('gg.png', 200,200, 100,100)
+hero = player('ggs.png', 200,200, 100,100)
+
 
 while game:
     for e in event.get():
@@ -82,8 +91,7 @@ while game:
             game = False
     okno.blit(fon,(0,0))
     #okno.fill((255,255,0)) # заливка после фона не нужна
-    ball.skok()
-    ball.ris()
+    fps.tick(60)
     hero.move()
     vrag.ris()
     vrag.rect.x += dx
@@ -95,7 +103,7 @@ while game:
         vrag.rect.y = 200
         hero.rect.x = 200
         hero.rect.y = 200
+    ball.skok()
+    ball.ris()
     display.update()
-    fps.tick(60)
    # стёр повторы кода
-
