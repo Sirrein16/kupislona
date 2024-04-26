@@ -61,15 +61,6 @@ class stena(sprite.Sprite): # перенёс класс стены наверх
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
 
-class stena(sprite.Sprite): # перенёс класс стены наверх
-    def __init__(self, x,y,w,h):
-        self.image = Surface((w,h))
-        self.image.fill((10, 200, 250))
-        self.rect = self.image.get_rect()
-        self.rect.x = x
-        self.rect.y = y
-    def ris(self):
-        okno.blit(self.image, (self.rect.x, self.rect.y))
 from random import*
 
 class myachsotoni(sprite.Sprite):
