@@ -89,7 +89,7 @@ if sprite.collide_rect(ball, ещёктото): # тоже для вертика
 if sprite.collide_rect(ball, горизонтальнаястена):
   ball.dx *= -1
 
-fon = image.load('fon.jpg')
+fon = image.load('fons.jpg')
 fon = transform.scale(fon, (800,600))
 
 vrag = gameobject('gg2.png', 800, 200, 20, 20)
