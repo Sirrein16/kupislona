@@ -1,5 +1,6 @@
 from pygame import*
 
+
 okno = display.set_mode((800,600))
 game = True
 fps = time.Clock()
