@@ -1,9 +1,12 @@
 from pygame import*
 
 
-okno = display.set_mode((800,600))
+okno = display.set_mode((1200,700))
 game = True
 fps = time.Clock()
+
+dx = -2
+dy = -2
 
 class gameobject(sprite.Sprite):
     def __init__(self, img, x,y,w,h):
@@ -34,24 +37,7 @@ class player(gameobject):
         if kn[K_w]:
             self.lasty = self.rect.y
             self.rect.y -= 5
-
-    def move2(self):
-        self.ris()
-        kn = key.get_pressed()
-        if kn[K_LEFT]:
-            self.lastx = self.rect.x
-            self.rect.x -= 5
-        if kn[K_RIGHT]:
-            self.lastx = self.rect.x
-            self.rect.x += 5
-        if kn[K_DOWN]:
-            self.lasty = self.rect.y
-            self.rect.y += 5
-        if kn[K_UP]:
-            self.lasty = self.rect.y
-            self.rect.y -= 5
-
-
+            
 class stena(sprite.Sprite): # перенёс класс стены наверх
     def __init__(self, x,y,w,h):
         self.image = Surface((w,h))
@@ -80,15 +66,15 @@ class myachsotoni(sprite.Sprite):
         self.rect.x += self.dx
         self.rect.y += self.dy
 
-ball = myachsotoni("images.jpg", 780, 280, 40,40)
+ball = myachsotoni("images.jpg", 780, 280, 60,60)
 
 
 fon = image.load('fon.jpg')
-fon = transform.scale(fon, (800,600))
+fon = transform.scale(fon, (1200,700))
 
-vrag = player('gg2.png', 800, 200, 20, 20)
+vrag = gameobject('gg2.png', 800, 200, 100, 100)
 
-hero = player('gg.png', 200,200, 35,35)
+hero = player('gg.png', 200,200, 100,100)
 
 while game:
     for e in event.get():
@@ -98,7 +84,16 @@ while game:
     #okno.fill((255,255,0)) # заливка после фона не нужна
     ball.skok()
     hero.move()
-    hero2.move2()
+    vrag.ris()
+    vrag.rect.x += dx
+    vrag.rect.y += dy
+    if sprite.collide_rect(hero,vrag):
+        dx *= -1
+        dy *= -1
+        vrag.rect.x = 800
+        vrag.rect.y = 200
+        hero.rect.x = 200
+        hero.rect.y = 200
     display.update()
     fps.tick(60)
    # стёр повторы кода
