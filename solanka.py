@@ -83,6 +83,7 @@ while game:
     okno.blit(fon,(0,0))
     #okno.fill((255,255,0)) # заливка после фона не нужна
     ball.skok()
+    ball.ris()
     hero.move()
     vrag.ris()
     vrag.rect.x += dx
