@@ -65,9 +65,9 @@ class stena(sprite.Sprite): # перенёс класс стены наверх
 from random import*
 
 class myachsotoni(sprite.Sprite):
-  def __init__(self, pik, x,y,sw,sh): #  картинка, икс, игрек, ширина, высота
+    def __init__(self, pik, x,y,sw,sh): #  картинка, икс, игрек, ширина, высота
         super().__init__()
-        self.image = transform.scale(image.load(img), (sw,sh))
+        self.image = transform.scale(image.load(pik), (sw,sh))
         self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
@@ -76,25 +76,19 @@ class myachsotoni(sprite.Sprite):
     def ris(self):
         okno.blit(self.image, (self.rect.x, self.rect.y))
     def skok(self):
-      self.rect.x += self.dx
-      self.rect.y += self.dy
+        self.ris()
+        self.rect.x += self.dx
+        self.rect.y += self.dy
 
 ball = myachsotoni("images.jpg", 780, 280, 40,40)
-# пример использования в цикле while
-    
-#...
-if sprite.collide_rect(ball, ещёктото): # тоже для вертикальных стенок
-  ball.dy *= -1 
 
-if sprite.collide_rect(ball, горизонтальнаястена):
-  ball.dx *= -1
 
-fon = image.load('fons.jpg')
+fon = image.load('fon.jpg')
 fon = transform.scale(fon, (800,600))
 
-vrag = gameobject('gg2.png', 800, 200, 20, 20)
+vrag = player('gg2.png', 800, 200, 20, 20)
 
-hero = player('ggs.png', 200,200, 35,35)
+hero = player('gg.png', 200,200, 35,35)
 
 while game:
     for e in event.get():
@@ -102,9 +96,10 @@ while game:
             game = False
     okno.blit(fon,(0,0))
     #okno.fill((255,255,0)) # заливка после фона не нужна
-    fps.tick(60)
+    ball.skok()
     hero.move()
     hero2.move2()
     display.update()
+    fps.tick(60)
    # стёр повторы кода
 
