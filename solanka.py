@@ -94,7 +94,7 @@ fon = transform.scale(fon, (800,600))
 
 vrag = gameobject('gg2.png', 800, 200, 20, 20)
 
-hero = player('gg.png', 200,200, 35,35)
+hero = player('ggs.png', 200,200, 35,35)
 
 while game:
     for e in event.get():
